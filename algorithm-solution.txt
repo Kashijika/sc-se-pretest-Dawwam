@@ -1,0 +1,28 @@
+function findMaxInMin(arr, k):
+    // Validasi jika array kosong atau panjang k melebihi isi array
+    IF length of arr == 0 OR k > length of arr THEN
+        RETURN null
+    END IF
+
+    // Inisialisasi variabel untuk menyimpan nilai terbesar, diatur ke nilai paling kecil agar bisa tergantikan di iterasi pertama
+    SET max_of_mins TO -INFINITY
+
+    // Perulangan sebanyak subset, batas akhir (panjang array - k)
+    FOR i FROM 0 TO (length of arr -k) DO
+        //Elemen pertama subset sebagai nilai minimum sementara
+        SET current_min TO arr[i]
+
+        // Perulangan dalam subset mencari nilai terkecil
+        FOR j FROM i + 1 TO (i + k - 1) DO
+            IF arr[j] < current_min THEN
+                SET current_min TO arr[j]
+            END IF
+        END FOR
+
+        // Jika nilai terkecil subset > max_of_mins tersimpan, perbaruan nilai
+        IF current_min > max_of_mins THEN
+            SET max_of_mins TO current_min
+        END IF
+    END FOR
+
+    RETURN max_of_mins
